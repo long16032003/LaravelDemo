@@ -28,8 +28,8 @@ class UserController extends Controller
     public function getAll(Request $request)
     {
         $userData = $request->all();
-        $car = $this->user->getAll($userData);
-        return response()->json($car, 201);
+        $user = $this->user->getAll($userData);
+        return response()->json($user, 201);
     }
 
 

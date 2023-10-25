@@ -22,13 +22,13 @@ class UserRepository implements UserRepoInterface
     }
 
     public function updateUser($userId, $userData){
-        $user = User::findOrFail($userId);
+        $user = User::find($userId);
         $user->update($userData);
         return $user;
     }
 
     public function deleteUser($userId){
-        $user = User::findOrFail($userId);
+        $user = User::find($userId);
         $user->delete();
         return $user;
     }
