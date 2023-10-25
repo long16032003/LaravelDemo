@@ -62,11 +62,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,String $userId)
     {
-        // $cardata = $request->all();
-        $userId = $request->route('id');
-        $res = $this->user->update($request->all(), $userId);
+        $res = $this->user->update($userId, $request->all());
         return $res;
     }
 
