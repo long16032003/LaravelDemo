@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TodolistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -26,10 +27,16 @@ use Illuminate\Support\Facades\DB;
 Route::get('/', [UserController::class, 'get']);
 
 
-Route::post('/users', [UserController::class, 'create']);
-Route::get('/users', [UserController::class, 'getAll']);
-Route::delete('/users/{id}', [UserController::class, 'destroy']);
-Route::put('/users/{id}', [UserController::class, 'update']);
+// Route::post('/users', [UserController::class, 'create']);
+// Route::get('/users', [UserController::class, 'getAll']);
+// Route::delete('/users/{id}', [UserController::class, 'destroy']);
+// Route::put('/users/{id}', [UserController::class, 'update']);
+
+Route::post('/todolists', [TodolistController::class, 'create']);
+Route::get('/todolists', [TodolistController::class, 'getAll']);
+Route::delete('/todolists/{id}', [TodolistController::class, 'destroy']);
+Route::put('/todolists/{id}', [TodolistController::class, 'update']);
+
 
 Route::match(['get', 'post'], '/yourpath', function () {
     // ...đường dẫn này đáp ứng 2 responds get và post

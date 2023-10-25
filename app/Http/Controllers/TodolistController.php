@@ -2,34 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Validation\StoreRequestUser;
-use App\Models\User;
+use App\Services\TodolistsService;
 use Illuminate\Http\Request;
-use App\Services\UserService;
+use App\Http\Validation\StoreRequestTodolists;
+use App\Models\Todolist;
 
-class UserController extends Controller
+class TodolistController extends Controller
 {
-    //
-    protected $user;
+    protected $todo;
 
-    public function __construct(UserService $user)
+    public function __construct(TodolistsService $todo)
     {
-        $this->user = $user;
+        $this->todo = $todo;
     }
 
-    public function create(StoreRequestUser $request)
+    public function create(StoreRequestTodolists $request)
     {
         // $car = Cars::create($request->all());
         // return
-        $userData = $request->only(['username', 'password']);
-        $user = $this->user->create($userData);
-        return response()->json($user, 201);
+        $todoData = $request->only(['text', 'complete']);
+        $todo = $this->todo->create($todoData);
+        return response()->json($todo, 201);
     }
     public function getAll(Request $request)
     {
-        $userData = $request->all();
-        $user = $this->user->getAll($userData);
-        return response()->json($user, 201);
+        $todoData = $request->all();
+        $todo = $this->todo->getAll($todoData);
+        return response()->json($todo, 201);
     }
 
 
@@ -50,7 +49,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Todolist $todo)
     {
         //
     }
@@ -62,9 +61,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,String $userId)
+    public function update(Request $request,String $todoId)
     {
-        $res = $this->user->update($userId, $request->all());
+        $res = $this->todo->update($todoId, $request->all());
         return $res;
     }
 
@@ -74,9 +73,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(String $userId)
+    public function destroy(String $todoId)
     {
-        $res = $this->user->delete($userId);
+        $res = $this->todo->delete($todoId);
         return $res;
     }
 }
